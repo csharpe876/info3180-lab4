@@ -1,6 +1,10 @@
 from flask_wtf import FlaskForm
+
 from wtforms import StringField, PasswordField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import InputRequired
+class UploadForm(FlaskForm):
+    file = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
 class LoginForm(FlaskForm):
