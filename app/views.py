@@ -1,4 +1,5 @@
 
+
 import os
 from app import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash, session, abort
@@ -119,3 +120,12 @@ def get_image(filename):
 def files():
     images = get_uploaded_images()
     return render_template('files.html', images=images)
+
+# Logout route
+@app.route('/logout')
+@login_required
+def logout():
+    from flask_login import logout_user
+    logout_user()
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('home'))
